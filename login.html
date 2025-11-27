@@ -1,17 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Reclame POA</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Card de Login */
+        .login-container {
+            margin: 60px auto;
+            max-width: 380px;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .login-container h2 {
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #007bff;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 25px;
+            border: 2px solid #007bff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-box:focus {
+            border-color: #0056b3;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background-color: #005fcc;
+        }
+
+        /* Links */
+        .links {
+            margin-top: 15px;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: gray;
+            font-size: 14px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            margin-top: 80px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: white;
+            margin: 0 8px;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
-    <h2>Login</h2>
 
-    <form id="loginForm">
-        <input id="email" type="email" placeholder="Email" required>
-        <input id="senha" type="password" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
-    </form>
+    <div class="header">
+        <h1>Reclame POA</h1>
+        <p>Acesse sua conta para registrar e acompanhar reclamações!</p>
+    </div>
 
-    <script src="script.js"></script>
+    <div class="login-container">
+        <h2>Entrar</h2>
+
+        <form action="login.php" method="POST">
+            <input type="text" class="input-box" name="email" placeholder="Seu Email" required>
+            <input type="password" class="input-box" name="senha" placeholder="Sua Senha" required>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="links">
+            <a href="registrar.html">Não tem conta? Criar conta</a><br>
+            <a href="index.html">Voltar à página inicial</a>
+        </div>
+    </div>
+
+    <footer>
+        <a href="#">Categorias</a>
+        <a href="#">Mapa de Problemas</a>
+        <a href="#">Registrar Reclamação</a>
+        <a href="#">Ajuda</a>
+        <a href="#">Política de Privacidade e Termos de Uso</a>
+        <a href="#">Acessibilidade</a>
+        <br><br>
+        Todos os Direitos Reservados | Senac Distrito Criativo
+    </footer>
+
 </body>
 </html>
