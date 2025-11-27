@@ -1,18 +1,13 @@
-<?php include "conexao.php"; ?>
+<?php
+include "conexao.php";
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Reclame POA</title>
-    <script src="script.js" defer></script>
-</head>
-<body>
+$id_usuario = $_POST["id_usuario"];
+$texto = $_POST["texto"];
 
-    <form id="formReclamacao" action="salvar_primeiro.php" method="POST">
-        <input type="text" id="campoReclamacao" name="texto" placeholder="Digite sua reclamação..." required>
-        <h6 id="loginTexto">Já tem conta? <a href="login.php">Faça login</a></h6>
-    </form>
+$sql = "INSERT INTO reclamacoes (id_usuario, texto) VALUES (?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("is", $id_usuario, $texto);
+$stmt->execute();
 
-</body>
-</html>
+header("Location: obrigado.php");
+exit;

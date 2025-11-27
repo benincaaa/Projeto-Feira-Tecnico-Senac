@@ -1,37 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RECLAME POA!</title>
     <link rel="stylesheet" href="home.css" />
-  </head>
+    <script src="home.js"></script>
+</head>
 
-  <body>
+<body>
     <header>
-      <img class="img1" src="img.png" alt="" />
-      <img class="img2" src="megafone.png" alt="" />
-      <h1>Reclame POA</h1>
-      <h2>Ajude a melhorar a sua cidade!</h2>
-      <h2>Insira detalhes, nomes, endereços, sem medo!</h2>
+        <img class="img1" src="img.png" alt="" />
+        <img class="img2" src="megafone.png" alt="" />
+        <h1>Reclame POA</h1>
+        <h2>Ajude a melhorar a sua cidade!</h2>
+        <h2>Insira detalhes, nomes, endereços, sem medo!</h2>
     </header>
 
     <main>
-      <div class="search-container">
-        <input type="text" placeholder="Descreva sua Reclamação..." />
-        <a href="login.html" class="login-text">Já tem conta? Faça login</a>
-      </div>
+        <div class="search-container">
+            <input 
+                type="text" 
+                name="texto" 
+                placeholder="Descreva sua Reclamação..." 
+                required
+            >
+            <a href="login.html" class="login-text">Já tem conta? Faça login</a>
+        </div>
     </main>
 
     <footer>
-      <button type="button" onclick="alert('Botão clicado!')">Categorias</button>
-      <button type="button" onclick="alert('Botão clicado!')">Mapa de Problemas</button>
-      <button type="button" onclick="alert('Botão clicado!')">Registrar Reclamação</button>
-      <button type="button" onclick="alert('Botão clicado!')">Ajuda</button>
-      <button type="button" onclick="alert('Botão clicado!')">Política de Privacidade e Termos de Uso</button>
-      <button type="button" onclick="alert('Botão clicado!')">Acessibilidade</button>
-      <br />
-      <h3>Todos os Direitos Reservados | Senac Distrito Criativo</h3>
+        <button type="button" onclick="alert('Botão clicado!')">Categorias</button>
+        <button type="button" onclick="alert('Botão clicado!')">Mapa de Problemas</button>
+        <button type="button" onclick="alert('Botão clicado!')">Registrar Reclamação</button>
+        <button type="button" onclick="alert('Botão clicado!')">Ajuda</button>
+        <button type="button" onclick="alert('Botão clicado!')">Política de Privacidade e Termos de Uso</button>
+        <button type="button" onclick="alert('Botão clicado!')">Acessibilidade</button>
+        <br />
+        <h3>Todos os Direitos Reservados | Senac Distrito Criativo</h3>
     </footer>
-  </body>
+</body>
 </html>

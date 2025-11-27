@@ -12,7 +12,7 @@ $id = $_GET["id"] ?? 0;
 
 <h2>Entrar</h2>
 
-<form action="autenticar.php" method="POST">
+<form id="formReclamacao" action="php/salvar.php" method="POST">
     <input type="hidden" name="id" value="<?= $id ?>">
 
     <label>Email:</label><br>

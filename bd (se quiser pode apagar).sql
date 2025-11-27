@@ -10,4 +10,5 @@ CREATE TABLE reclamacoes (
     texto TEXT NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+      ON DELETE SET NULL
 );

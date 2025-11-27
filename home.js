@@ -1,19 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const campo = document.querySelector("input[name='texto']");
+    
+    if (!campo) return;
 
-    const input = document.getElementById("campoReclamacao");
-    const form = document.getElementById("formReclamacao");
-    const loginTexto = document.getElementById("loginTexto");
-
-    loginTexto.style.color = "gray";
-    loginTexto.style.marginLeft = "260px";
-    loginTexto.style.marginTop = "5px";
-    loginTexto.style.fontSize = "13px";
-
-    input.addEventListener("keydown", (e) => {
+    campo.addEventListener("keydown", function(e) {
         if (e.key === "Enter") {
-            e.preventDefault(); 
-            form.submit();
+            e.preventDefault();
+
+            const texto = campo.value.trim();
+            if (texto.length === 0) return;
+
+            window.location.href = `login.html?texto=${encodeURIComponent(texto)}`;
         }
     });
-
 });
