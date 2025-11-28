@@ -83,3 +83,50 @@ main {
     background: #005fcc;
     transform: scale(1.01); 
 }
+
+footer {
+    background-color: #0076ec;
+    width: 100%;
+    height: 130px;
+    padding: 10px 0 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.05);
+}
+
+.footer-buttons-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+footer button {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+footer button:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: none;
+}
+
+footer h3 {
+    color: #fff;
+    font-size: 14px;
+    margin: 4px 0 0 0;
+    padding-bottom: 5px;
+}

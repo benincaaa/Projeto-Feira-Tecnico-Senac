@@ -46,5 +46,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
     </div>
 </main>
+<footer>
+        <div class="footer-buttons-row">
+            <button type="button" onclick="alert('Botão clicado!')">Categorias</button>
+            <button type="button" onclick="alert('Botão clicado!')">Mapa de Problemas</button>
+            <button type="button" onclick="alert('Botão clicado!')">Registrar Reclamação</button>
+            <button type="button" onclick="alert('Botão clicado!')">Ajuda</button>
+            <button type="button" onclick="alert('Botão clicado!')">Política de Privacidade e Termos de Uso</button>
+        </div>
+        
+        <div class="footer-bottom-text">
+            <h3>Todos os Direitos Reservados | Senac Distrito Criativo</h3>
+        </div>
+    </footer>
 </body>
 </html>
