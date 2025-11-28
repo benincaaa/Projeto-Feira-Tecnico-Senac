@@ -6,12 +6,12 @@ include __DIR__ . "/php/conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $texto_final = trim($_POST["texto"]);
-    $id_usuario = $_POST["id"];
+    $usuario_id = $_POST["id"];
 
-    if (!empty($texto_final) && !empty($id_usuario)) {
-        $sql = "INSERT INTO reclamacoes (id_usuario, texto) VALUES (?, ?)";
+    if (!empty($texto_final) && !empty($usuario_id)) {
+        $sql = "INSERT INTO reclamacoes (usuario_id, texto) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("is", $id_usuario, $texto_final);
+        $stmt->bind_param("is", $usuario_id, $texto_final);
         $stmt->execute();
         
         header("Location: obrigado.html");
