@@ -46,13 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
     </div>
 </main>
-<footer>
+   <footer>
         <div class="footer-buttons-row">
-            <button type="button" onclick="alert('Botão clicado!')">Categorias</button>
-            <button type="button" onclick="alert('Botão clicado!')">Mapa de Problemas</button>
-            <button type="button" onclick="alert('Botão clicado!')">Registrar Reclamação</button>
-            <button type="button" onclick="alert('Botão clicado!')">Ajuda</button>
-            <button type="button" onclick="alert('Botão clicado!')">Política de Privacidade e Termos de Uso</button>
+            <button type="button" onclick="alert('Descreva, cadastre-se, revise e envie.')">Categorias</button>
+            <button type="button" onclick="alert('Problemas filtrados por local e tipo.')">Mapa de Problemas</button>
+            <button type="button" onclick="alert('Use a barra da página inicial!')">Registrar Reclamação</button>
+            <button type="button" onclick="alert('Volte para a página principal.')">Ajuda</button>
+            <button type="button" onclick="alert('Sua privacidade e termos garantidos.')">Política de Privacidade e Termos de Uso</button>
         </div>
         
         <div class="footer-bottom-text">
