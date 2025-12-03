@@ -70,9 +70,26 @@
 <body>
     <header>
         <div class="container">
-            <div class="brand">
-                <img src="megafone.png" alt="Logo" class="img1">
-                <h1>Registrar Reclamação</h1>
+            <div class="brand" style="display:flex;align-items:center;gap:12px;">
+                <img class="img2" src="megafone.png" alt="logo" />
+                <div class="header-titles">
+                    <h1>Reclame POA</h1>
+                </div>
+            </div>
+
+            <!-- input centralizado no header -->
+            <div class="center-input">
+                <input
+                    id="texto-header"
+                    type="text"
+                    name="texto"
+                    placeholder="Descreva sua Reclamação..."
+                />
+            </div>
+
+            <div class="actions">
+                <button class="btn-outline" type="button" id="btn-cadastro">Cadastro</button>
+                <button class="btn-primary" type="button" id="btn-login">Login</button>
             </div>
         </div>
     </header>
@@ -102,16 +119,40 @@
             </form>
         </div>
     </main>
-    <script>
-        // Exibe mensagem de sucesso ao enviar (simulação)
-        document.getElementById('formReclamacao').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('sucessoMsg').style.display = 'block';
-            setTimeout(function() {
-                document.getElementById('sucessoMsg').style.display = 'none';
-                document.getElementById('formReclamacao').reset();
-            }, 2500);
-        });
-    </script>
+
+    <footer>
+        <div class="footer-buttons-row">
+            <a href="categorias.html" class="footer-link-btn">Categorias</a>
+            <a href="mapa.html" class="footer-link-btn">Mapa de Problemas</a>
+            <a href="registrar.html" class="footer-link-btn">Registrar Reclamação</a>
+            <a href="ajuda.html" class="footer-link-btn">Ajuda</a>
+            <a href="politica.html" class="footer-link-btn">Política de Privacidade e Termos de Uso</a>
+        </div>
+
+        <div class="footer-bottom-text">
+            <h3>Todos os Direitos Reservados | Senac Distrito Criativo</h3>
+        </div>
+    </footer>
+<script>
+    // redireciona para login.html ou cadastro.html passando o texto como querystring
+    document.getElementById('btn-login').addEventListener('click', function(){
+        const texto = encodeURIComponent(document.getElementById('texto-header').value || '');
+        location.href = 'login.html?texto=' + texto;
+    });
+
+    document.getElementById('btn-cadastro').addEventListener('click', function(){
+        const texto = encodeURIComponent(document.getElementById('texto-header').value || '');
+        location.href = 'cadastro.html?texto=' + texto;
+    });
+    // Exibe mensagem de sucesso ao enviar (simulação)
+    document.getElementById('formReclamacao').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('sucessoMsg').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('sucessoMsg').style.display = 'none';
+            document.getElementById('formReclamacao').reset();
+        }, 2500);
+    });
+</script>
 </body>
 </html>

@@ -39,9 +39,26 @@
 <body>
     <header>
         <div class="container">
-            <div class="brand">
-                <img src="megafone.png" alt="Logo" class="img1">
-                <h1>Mapa de Problemas</h1>
+            <div class="brand" style="display:flex;align-items:center;gap:12px;">
+                <img class="img2" src="megafone.png" alt="logo" />
+                <div class="header-titles">
+                    <h1>Reclame POA</h1>
+                </div>
+            </div>
+
+            <!-- input centralizado no header -->
+            <div class="center-input">
+                <input
+                    id="texto-header"
+                    type="text"
+                    name="texto"
+                    placeholder="Descreva sua Reclamação..."
+                />
+            </div>
+
+            <div class="actions">
+                <button class="btn-outline" type="button" id="btn-cadastro">Cadastro</button>
+                <button class="btn-primary" type="button" id="btn-login">Login</button>
             </div>
         </div>
     </header>
@@ -49,8 +66,8 @@
         <div class="mapa-container">
             <div class="mapa-title">Mapa de Problemas</div>
             <div style="display:flex; flex-direction:row; gap:32px; justify-content:center; align-items:flex-start; width:100%; max-width:100%;">
-                <div style="flex:2 1 0; min-width:340px; max-width:800px;">
-                    <div id="customMap" style="width:100%;height:420px;border-radius:12px;box-shadow:0 2px 12px rgba(30,64,175,0.08);background:#e0e7ef;position:relative;overflow:hidden;"></div>
+                <div style="flex:2 1 0; min-width:450px; max-width:1000px;">
+                    <div id="customMap" style="width:100%;height:600px;border-radius:12px;box-shadow:0 2px 12px rgba(30,64,175,0.08);background:#e0e7ef;position:relative;overflow:hidden;"></div>
                 </div>
                 <div id="problemasTabela" style="flex:1 1 0; min-width:220px; max-width:320px; background:rgba(255,255,255,0.97); border-radius:10px; box-shadow:0 2px 12px rgba(30,64,175,0.10); padding:16px 18px; margin:0; text-align:left;">
                     <h3 style="margin:0 0 10px 0;font-size:1.1rem;color:#2563eb;text-align:center;">Problemas Mais Relatados</h3>
@@ -69,27 +86,42 @@
             </div>
             <p style="text-align:center;">Visualize os problemas reportados por local e categoria em Porto Alegre.</p>
             <script>
-            // Busca reclamações reais via AJAX e atualiza tabela
+            // Dados fictícios para categorias mais relatadas
+            function gerarDadosFicticios() {
+                const categoriasFicticias = [
+                    {categoria: 'Iluminação Pública', quantidade: Math.floor(Math.random() * 50) + 20},
+                    {categoria: 'Saneamento', quantidade: Math.floor(Math.random() * 45) + 15},
+                    {categoria: 'Buracos nas Vias', quantidade: Math.floor(Math.random() * 40) + 10},
+                    {categoria: 'Lixo', quantidade: Math.floor(Math.random() * 35) + 12},
+                    {categoria: 'Trânsito', quantidade: Math.floor(Math.random() * 30) + 8},
+                    {categoria: 'Outros', quantidade: Math.floor(Math.random() * 25) + 5}
+                ];
+                // Ordenar por quantidade decrescente
+                return categoriasFicticias.sort((a, b) => b.quantidade - a.quantidade);
+            }
+
+            // Atualizar tabela com dados fictícios
+            const dadosFicticios = gerarDadosFicticios();
+            const tabelaBody = document.getElementById('tabelaProblemasBody');
+            tabelaBody.innerHTML = '';
+            dadosFicticios.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${item.categoria}</td><td>${item.quantidade}</td>`;
+                tabelaBody.appendChild(tr);
+            });
+
+            // Busca reclamações reais via AJAX para os marcadores (opcional)
             fetch('php/lista_reclamacoes.php')
                 .then(res => res.json())
                 .then(reclamacoes => {
-                    // Contar por categoria
-                    const contagem = {};
-                    reclamacoes.forEach(r => {
-                        const cat = r.categoria || 'Outros';
-                        contagem[cat] = (contagem[cat] || 0) + 1;
-                    });
-                    // Atualizar tabela
-                    const tabelaBody = document.getElementById('tabelaProblemasBody');
-                    tabelaBody.innerHTML = '';
-                    Object.entries(contagem).forEach(([cat, qtd]) => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `<td>${cat}</td><td>${qtd}</td>`;
-                        tabelaBody.appendChild(tr);
-                    });
+                    // Dados para marcadores continuam usando reclamações reais se disponíveis
+                    console.log('Reclamações carregadas:', reclamacoes.length);
+                })
+                .catch(error => {
+                    console.log('Usando apenas dados fictícios para marcadores');
                 });
 
-            // Mapa base usando Leaflet.js (continua mostrando marcadores simulados)
+            // Mapa base usando Leaflet.js com marcadores fictícios
             const mapDiv = document.getElementById('customMap');
             mapDiv.innerHTML += '<div id="leafletMap" style="width:100%;height:100%;"></div>';
             const leafletScript = document.createElement('script');
@@ -103,11 +135,101 @@
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
-                // Se quiser mostrar marcadores reais, precisa salvar lat/lng no banco
+
+                // Função para gerar coordenadas fictícias dentro de Porto Alegre
+                function gerarCoordenadasFicticias() {
+                    const latBase = -30.0346;
+                    const lngBase = -51.2177;
+                    const latOffset = (Math.random() - 0.5) * 0.05; // ±0.025 graus (~2.5km)
+                    const lngOffset = (Math.random() - 0.5) * 0.05;
+                    return [latBase + latOffset, lngBase + lngOffset];
+                }
+
+                // Cores para diferentes categorias
+                const coresCategorias = {
+                    'Iluminação Pública': '#ff6b6b',
+                    'Saneamento': '#4ecdc4',
+                    'Buracos nas Vias': '#45b7d1',
+                    'Lixo': '#ffa726',
+                    'Trânsito': '#ab47bc',
+                    'Outros': '#90a4ae'
+                };
+
+                // Buscar reclamações e adicionar marcadores fictícios
+                fetch('php/lista_reclamacoes.php')
+                    .then(res => res.json())
+                    .then(reclamacoes => {
+                        reclamacoes.forEach(reclamacao => {
+                            const coords = gerarCoordenadasFicticias();
+                            const categoria = reclamacao.categoria || 'Outros';
+                            const cor = coresCategorias[categoria] || coresCategorias['Outros'];
+
+                            // Criar ícone personalizado com cor da categoria
+                            const customIcon = L.divIcon({
+                                html: `<div style="background-color:${cor};width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>`,
+                                className: 'custom-marker',
+                                iconSize: [12, 12],
+                                iconAnchor: [6, 6]
+                            });
+
+                            const marker = L.marker(coords, {icon: customIcon}).addTo(map);
+                            marker.bindPopup(`
+                                <b>${categoria}</b><br>
+                                ${reclamacao.descricao || 'Problema reportado'}<br>
+                                <small>Data: ${reclamacao.data || 'N/A'}</small>
+                            `);
+                        });
+                    })
+                    .catch(error => {
+                        console.log('Erro ao carregar reclamações:', error);
+                        // Adicionar marcadores de exemplo se não conseguir carregar
+                        for(let i = 0; i < 10; i++) {
+                            const coords = gerarCoordenadasFicticias();
+                            const categorias = Object.keys(coresCategorias);
+                            const categoria = categorias[Math.floor(Math.random() * categorias.length)];
+                            const cor = coresCategorias[categoria];
+
+                            const customIcon = L.divIcon({
+                                html: `<div style="background-color:${cor};width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>`,
+                                className: 'custom-marker',
+                                iconSize: [12, 12],
+                                iconAnchor: [6, 6]
+                            });
+
+                            const marker = L.marker(coords, {icon: customIcon}).addTo(map);
+                            marker.bindPopup(`<b>${categoria}</b><br>Problema fictício de exemplo`);
+                        }
+                    });
             };
             document.body.appendChild(leafletScript);
             </script>
         </div>
     </main>
+
+    <footer>
+        <div class="footer-buttons-row">
+            <a href="categorias.html" class="footer-link-btn">Categorias</a>
+            <a href="mapa.html" class="footer-link-btn">Mapa de Problemas</a>
+            <a href="registrar.html" class="footer-link-btn">Registrar Reclamação</a>
+            <a href="ajuda.html" class="footer-link-btn">Ajuda</a>
+            <a href="politica.html" class="footer-link-btn">Política de Privacidade e Termos de Uso</a>
+        </div>
+
+        <div class="footer-bottom-text">
+            <h3>Todos os Direitos Reservados | Senac Distrito Criativo</h3>
+        </div>
+    </footer>
+<script>
+    // redireciona para login.html ou cadastro.html passando o texto como querystring
+    document.getElementById('btn-login').addEventListener('click', function(){
+        const texto = encodeURIComponent(document.getElementById('texto-header').value || '');
+        location.href = 'login.html?texto=' + texto;
+    });
+
+    document.getElementById('btn-cadastro').addEventListener('click', function(){
+        const texto = encodeURIComponent(document.getElementById('texto-header').value || '');
+        location.href = 'cadastro.html?texto=' + texto;
+    });
+</script>
 </body>
 </html>
