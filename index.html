@@ -10,32 +10,60 @@
 
 <body>
     <header>
-        <img class="img1" src="img.png" alt="" />
-        <img class="img2" src="megafone.png" alt="" />
-        <h1>Reclame POA</h1>
-        <h2>Ajude a melhorar a sua cidade!</h2>
-        <h2>Insira detalhes, nomes, endereços, sem medo!</h2>
+        <div class="container">
+            <div class="brand" style="display:flex;align-items:center;gap:12px;">
+                <img class="img2" src="megafone.png" alt="logo" />
+                <div class="header-titles">
+                    <h1>Reclame POA</h1>
+                </div>
+            </div>
+
+            <!-- input centralizado no header -->
+            <div class="center-input">
+                <input 
+                    id="texto-header"
+                    type="text" 
+                    name="texto" 
+                    placeholder="Descreva sua Reclamação..." 
+                />
+            </div>
+
+            <div class="actions">
+                <button class="btn-outline" type="button" id="btn-cadastro">Cadastro</button>
+                <button class="btn-primary" type="button" id="btn-login">Login</button>
+            </div>
+        </div>
     </header>
 
     <main>
-        <div class="search-container">
-            <input 
-                type="text" 
-                name="texto" 
-                placeholder="Descreva sua Reclamação..." 
-                required
-            >
-            <a href="login.html" class="login-text">Já tem conta? Faça login</a>
+        <div class="main-content-row">
+            <section class="main-welcome">
+                <div class="welcome-card">
+                    <h2>Bem-vindo ao Reclame POA!</h2>
+                    <p class="welcome-lead">Aqui você pode registrar, acompanhar e visualizar reclamações sobre sua cidade de forma simples e rápida.</p>
+                    <ul class="welcome-instructions">
+                        <li>Descreva sua reclamação no campo acima.</li>
+                        <li>Cadastre-se ou faça login para acompanhar o andamento.</li>
+                        <li>Veja as últimas reclamações da comunidade ao lado.</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="latest-complaints" class="latest-complaints">
+                <h3>Últimas Reclamações</h3>
+                <ul id="complaints-list">
+                    <li class="loading">Carregando...</li>
+                </ul>
+            </section>
         </div>
     </main>
 
     <footer>
         <div class="footer-buttons-row">
-            <button type="button" onclick="alert('Descreva, cadastre-se, revise e envie.')">Categorias</button>
-            <button type="button" onclick="alert('Problemas filtrados por local e tipo.')">Mapa de Problemas</button>
-            <button type="button" onclick="alert('Use a barra da página inicial!')">Registrar Reclamação</button>
-            <button type="button" onclick="alert('Volte para a página principal.')">Ajuda</button>
-            <button type="button" onclick="alert('Sua privacidade e termos garantidos.')">Política de Privacidade e Termos de Uso</button>
+            <a href="categorias.html" class="footer-link-btn">Categorias</a>
+            <a href="mapa.html" class="footer-link-btn">Mapa de Problemas</a>
+            <a href="registrar.html" class="footer-link-btn">Registrar Reclamação</a>
+            <a href="ajuda.html" class="footer-link-btn">Ajuda</a>
+            <a href="politica.html" class="footer-link-btn">Política de Privacidade e Termos de Uso</a>
         </div>
         
         <div class="footer-bottom-text">
@@ -43,4 +71,16 @@
         </div>
     </footer>
 </body>
+<script>
+    // redireciona para login.html ou cadastro.html passando o texto como querystring
+    document.getElementById('btn-login').addEventListener('click', function(){
+        const texto = encodeURIComponent(document.getElementById('texto-header').value || '');
+        location.href = 'login.html?texto=' + texto;
+    });
+
+    document.getElementById('btn-cadastro').addEventListener('click', function(){
+        const texto = encodeURIComponent(document.getElementById('texto-header').value || '');
+        location.href = 'cadastro.html?texto=' + texto;
+    });
+</script>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+<main>
+  <div class="login-page">
+    <h2>Cadastro</h2>
+
+    <form action="#" method="POST">
+      <input type="hidden" name="texto" id="texto">
+
+      <input type="text" name="nome" placeholder="Nome" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+
+      <button class="login-btn" type="submit">Cadastrar</button>
+    </form>
+
+    <a class="form-link" href="index.html">Voltar</a>
+  </div>
+</main>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("texto").value = params.get("texto") || "";
+</script>
+</body>
+</html>

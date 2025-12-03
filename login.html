@@ -13,13 +13,12 @@
   <div class="login-page">
     <h2>Entrar</h2>
 
+    <div id="login-erro" style="display:none;color:#d32f2f;background:#ffeaea;padding:10px 14px;border-radius:8px;margin-bottom:14px;text-align:center;font-weight:500"></div>
+
     <form action="php/autenticar.php" method="POST">
-
       <input type="hidden" name="texto" id="texto">
-
       <input type="email" name="email" placeholder="Email" required>
       <input type="password" name="senha" placeholder="Senha" required>
-
       <button class="login-btn" type="submit">Entrar</button>
     </form>
 
@@ -30,6 +29,16 @@
 <script>
     const params = new URLSearchParams(window.location.search);
     document.getElementById("texto").value = params.get("texto") || "";
+    const erro = params.get("erro");
+    if (erro) {
+      const erroDiv = document.getElementById("login-erro");
+      if (erro === "senha") {
+        erroDiv.textContent = "Senha incorreta. Tente novamente.";
+      } else {
+        erroDiv.textContent = "Erro ao fazer login. Verifique seus dados.";
+      }
+      erroDiv.style.display = "block";
+    }
 </script>
 
 </body>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorias de Reclamações</title>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        .categorias-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(30,64,175,0.07);
+            padding: 36px 32px 28px 32px;
+        }
+        .categorias-title {
+            color: #2563eb;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .categorias-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .categoria-card {
+            background: #f1f5fa;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(30,64,175,0.04);
+            padding: 24px 32px;
+            min-width: 180px;
+            max-width: 220px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #1e293b;
+            font-weight: 500;
+            transition: box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .categoria-card:hover {
+            box-shadow: 0 8px 28px rgba(30,64,175,0.13);
+            background: #e0e7ef;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="brand">
+                <img src="megafone.png" alt="Logo" class="img1">
+                <h1>Categorias</h1>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="categorias-container">
+            <div class="categorias-title">Categorias de Reclamações</div>
+            <div class="categorias-list">
+                <div class="categoria-card">Infraestrutura</div>
+                <div class="categoria-card">Atendimento</div>
+                <div class="categoria-card">Serviços</div>
+                <div class="categoria-card">Limpeza</div>
+                <div class="categoria-card">Segurança</div>
+                <div class="categoria-card">Outros</div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

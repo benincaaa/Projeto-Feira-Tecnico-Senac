@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Reclamação</title>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        .registrar-container {
+            max-width: 520px;
+            margin: 48px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(30,64,175,0.07);
+            padding: 40px 32px 32px 32px;
+        }
+        .registrar-title {
+            color: #2563eb;
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+        .registrar-form label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .registrar-form input, .registrar-form textarea, .registrar-form select {
+            width: 100%;
+            margin-bottom: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #dbe6f6;
+            font-size: 1rem;
+            background: #f8fafc;
+            transition: border-color 0.2s;
+        }
+        .registrar-form input:focus, .registrar-form textarea:focus, .registrar-form select:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+        .registrar-form button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(30,64,175,0.10);
+            transition: background 0.2s;
+        }
+        .registrar-form button:hover {
+            background: #003a70;
+        }
+        .registrar-sucesso {
+            color: #16a34a;
+            background: #e7f9ed;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 18px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="brand">
+                <img src="megafone.png" alt="Logo" class="img1">
+                <h1>Registrar Reclamação</h1>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="registrar-container">
+            <div class="registrar-title">Registrar Reclamação</div>
+            <div class="registrar-sucesso" id="sucessoMsg">Reclamação enviada com sucesso!</div>
+            <form class="registrar-form" id="formReclamacao" autocomplete="off">
+                <label for="categoria">Categoria</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="">Selecione</option>
+                    <option>Infraestrutura</option>
+                    <option>Atendimento</option>
+                    <option>Serviços</option>
+                    <option>Limpeza</option>
+                    <option>Segurança</option>
+                    <option>Outros</option>
+                </select>
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao" rows="4" required placeholder="Descreva o problema..."></textarea>
+                <label for="local">Local</label>
+                <input type="text" id="local" name="local" required placeholder="Ex: Sala 12, Banheiro, Entrada...">
+                <button type="submit">Enviar Reclamação</button>
+                <div style="text-align:center;font-size:13px;color:#64748b;margin-top:10px;">
+                    Dúvidas? Fale com <a href="mailto:suporte@reclamepoa.com">suporte@reclamepoa.com</a>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script>
+        // Exibe mensagem de sucesso ao enviar (simulação)
+        document.getElementById('formReclamacao').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('sucessoMsg').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('sucessoMsg').style.display = 'none';
+                document.getElementById('formReclamacao').reset();
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
