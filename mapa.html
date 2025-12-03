@@ -48,8 +48,65 @@
     <main>
         <div class="mapa-container">
             <div class="mapa-title">Mapa de Problemas</div>
-            <div class="mapa-img">(Mapa interativo em breve)</div>
-            <p style="text-align:center;">Visualize os problemas reportados por local e categoria.</p>
+            <div style="display:flex; flex-direction:row; gap:32px; justify-content:center; align-items:flex-start; width:100%; max-width:100%;">
+                <div style="flex:2 1 0; min-width:340px; max-width:800px;">
+                    <div id="customMap" style="width:100%;height:420px;border-radius:12px;box-shadow:0 2px 12px rgba(30,64,175,0.08);background:#e0e7ef;position:relative;overflow:hidden;"></div>
+                </div>
+                <div id="problemasTabela" style="flex:1 1 0; min-width:220px; max-width:320px; background:rgba(255,255,255,0.97); border-radius:10px; box-shadow:0 2px 12px rgba(30,64,175,0.10); padding:16px 18px; margin:0; text-align:left;">
+                    <h3 style="margin:0 0 10px 0;font-size:1.1rem;color:#2563eb;text-align:center;">Problemas Mais Relatados</h3>
+                    <table style="width:100%;border-collapse:collapse;font-size:0.98rem;">
+                        <thead>
+                            <tr style="background:#e0e7ef;color:#1e293b;">
+                                <th style="padding:6px 4px;text-align:left;border-bottom:1px solid #dbe6f6;">Categoria</th>
+                                <th style="padding:6px 4px;text-align:left;border-bottom:1px solid #dbe6f6;">Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaProblemasBody">
+                            <!-- Dados dinâmicos -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p style="text-align:center;">Visualize os problemas reportados por local e categoria em Porto Alegre.</p>
+            <script>
+            // Busca reclamações reais via AJAX e atualiza tabela
+            fetch('php/lista_reclamacoes.php')
+                .then(res => res.json())
+                .then(reclamacoes => {
+                    // Contar por categoria
+                    const contagem = {};
+                    reclamacoes.forEach(r => {
+                        const cat = r.categoria || 'Outros';
+                        contagem[cat] = (contagem[cat] || 0) + 1;
+                    });
+                    // Atualizar tabela
+                    const tabelaBody = document.getElementById('tabelaProblemasBody');
+                    tabelaBody.innerHTML = '';
+                    Object.entries(contagem).forEach(([cat, qtd]) => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `<td>${cat}</td><td>${qtd}</td>`;
+                        tabelaBody.appendChild(tr);
+                    });
+                });
+
+            // Mapa base usando Leaflet.js (continua mostrando marcadores simulados)
+            const mapDiv = document.getElementById('customMap');
+            mapDiv.innerHTML += '<div id="leafletMap" style="width:100%;height:100%;"></div>';
+            const leafletScript = document.createElement('script');
+            leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            leafletScript.onload = function() {
+                const leafletCss = document.createElement('link');
+                leafletCss.rel = 'stylesheet';
+                leafletCss.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                document.head.appendChild(leafletCss);
+                const map = L.map('leafletMap').setView([-30.0346, -51.2177], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap'
+                }).addTo(map);
+                // Se quiser mostrar marcadores reais, precisa salvar lat/lng no banco
+            };
+            document.body.appendChild(leafletScript);
+            </script>
         </div>
     </main>
 </body>
